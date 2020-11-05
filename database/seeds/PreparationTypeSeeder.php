@@ -11,6 +11,6 @@ class PreparationTypeSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\PreparationType::class, 10)->create();
+        factory(App\PreparationType::class, 5)->create();
     }
 }
