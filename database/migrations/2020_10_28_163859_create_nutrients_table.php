@@ -60,6 +60,7 @@ class CreateNutrientsTable extends Migration
             $table->decimal('arsenic_ug')->nullable();
             $table->decimal('dha_mg')->nullable();
             $table->decimal('ara_mg')->nullable();
+            $table->softDeletes();
         });
     }
 

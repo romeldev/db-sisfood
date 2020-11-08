@@ -16,7 +16,7 @@ class CreatePreparationTypesTable extends Migration
         Schema::create('preparation_types', function (Blueprint $table) {
             $table->id();
             $table->string('descrip');
-            // $table->softDeletes();
+            $table->softDeletes();
         });
     }
 

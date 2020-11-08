@@ -15,8 +15,9 @@ class CreateFoodsTable extends Migration
     {
         Schema::create('foods', function (Blueprint $table) {
             $table->id('id');
-            $table->foreignId('food_type_id');
+            $table->foreignId('ingredient_type_id');
             $table->string('descrip');
+            $table->softDeletes();
         });
     }
 

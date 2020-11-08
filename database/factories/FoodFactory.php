@@ -3,15 +3,14 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Food;
-use App\FoodType;
+use App\IngredientType;
 use Faker\Generator as Faker;
 
 $factory->define(Food::class, function (Faker $faker) {
 
     $data = [
         'descrip' => strtoupper($faker->words(rand(3, 5), true)),
-        
-        'food_type_id' => FoodType::inRandomOrder()->first()->id,
+        'ingredient_type_id' => IngredientType::inRandomOrder()->first()->id,
 
         // 'grams' => 100,
         // 'net_weight' => 100,

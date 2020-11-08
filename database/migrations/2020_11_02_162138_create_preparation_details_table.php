@@ -15,10 +15,11 @@ class CreatePreparationDetailsTable extends Migration
     {
         Schema::create('preparation_details', function (Blueprint $table) {
             $table->id();
+            $table->decimal('amount');
+            $table->softDeletes();
             $table->foreignId('preparation_id')->constrained('preparations');
             $table->foreignId('food_id')->constrained('foods');
             $table->foreignId('factor_unit_id')->constrained('factor_units');
-            $table->decimal('amount');
         });
     }
 

@@ -19,6 +19,7 @@ class CreateFactorUnitsTable extends Migration
             $table->foreignId('unit_type_id')->constrained('unit_types');
             $table->string('descrip');
             $table->decimal('factor');
+            $table->softDeletes();
         });
     }
 

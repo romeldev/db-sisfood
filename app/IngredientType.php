@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FoodType extends Model
+class IngredientType extends Model
 {
     protected $fillable = [ 'id', 'descrip', 'abrev' ];
 

@@ -16,6 +16,7 @@ class CreatePreparationsTable extends Migration
         Schema::create('preparations', function (Blueprint $table) {
             $table->id();
             $table->string('descrip');
+            $table->softDeletes();
             $table->foreignId('preparation_type_id')->constrained('preparation_types');
             $table->foreignId('company_id')->constrained('companies');
         });
