@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePreparationsTable extends Migration
+class CreateProgrammingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreatePreparationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('preparations', function (Blueprint $table) {
+        Schema::create('programmings', function (Blueprint $table) {
             $table->id();
-            $table->string('descrip');
-            $table->foreignId('preparation_type_id')->constrained('preparation_types');
+            $table->date('date');
             $table->foreignId('company_id')->constrained('companies');
+            $table->foreignId('professional_id')->constrained('professionals');
+            $table->foreignId('regimen_type_id')->constrained('regimen_types');
+            $table->foreignId('food_type_id')->constrained('food_types');
             $table->softDeletes();
         });
     }
@@ -29,6 +31,6 @@ class CreatePreparationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('preparations');
+        Schema::dropIfExists('programmings');
     }
 }

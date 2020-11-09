@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePreparationsTable extends Migration
+class CreateMenusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreatePreparationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('preparations', function (Blueprint $table) {
+        Schema::create('menus', function (Blueprint $table) {
             $table->id();
-            $table->string('descrip');
-            $table->foreignId('preparation_type_id')->constrained('preparation_types');
-            $table->foreignId('company_id')->constrained('companies');
-            $table->softDeletes();
+            $table->integer('order');
+            $table->string('label');
+            $table->string('icon');
+            $table->string('view')->nullable();
+            $table->foreignId('menu_id')->nullable();
         });
     }
 
@@ -29,6 +30,6 @@ class CreatePreparationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('preparations');
+        Schema::dropIfExists('menus');
     }
 }

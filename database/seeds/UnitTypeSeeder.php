@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\UnitType;
 
 class UnitTypeSeeder extends Seeder
 {
@@ -12,15 +13,16 @@ class UnitTypeSeeder extends Seeder
     public function run()
     {
         // factory(App\UnitType::class, 3)->create();
-        App\UnitType::insert($this->data());
+        UnitType::query()->delete();
+        UnitType::insert($this->data());
     }
 
     public function data()
     {
         return [
-            [ 'descrip' => 'MINIMA' ],
-            [ 'descrip' => 'ESTANDAR' ],
-            [ 'descrip' => 'COMERCIAL' ],
+            [ 'id' => 1, 'descrip' => 'MINIMA UNIDAD' ],
+            [ 'id' => 2, 'descrip' => 'ESTANDAR' ],
+            [ 'id' => 3, 'descrip' => 'MEDIDA CASERA' ],
         ];
     }
 }

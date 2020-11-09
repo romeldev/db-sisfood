@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFactorUnitsTable extends Migration
+class CreateProgrammingDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateFactorUnitsTable extends Migration
      */
     public function up()
     {
-        Schema::create('factor_units', function (Blueprint $table) {
+        Schema::create('programming_details', function (Blueprint $table) {
             $table->id();
-            $table->string('descrip');
-            $table->decimal('factor');
-            $table->foreignId('food_id')->constrained('foods');
-            $table->foreignId('unit_type_id')->constrained('unit_types');
+            $table->foreignId('programming_id')->constrained('programmings');
+            $table->foreignId('preparation_id')->constrained('preparations');
+            $table->decimal('portions');
             $table->softDeletes();
         });
     }
@@ -30,6 +29,6 @@ class CreateFactorUnitsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('factor_units');
+        Schema::dropIfExists('programming_details');
     }
 }
