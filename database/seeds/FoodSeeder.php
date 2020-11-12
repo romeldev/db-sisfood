@@ -12,7 +12,7 @@ class FoodSeeder extends Seeder
      */
     public function run()
     {
-        factory(Food::class, 20)->create();
+        factory(Food::class, 100)->create();
     }
 
 }
