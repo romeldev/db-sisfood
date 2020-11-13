@@ -6,6 +6,7 @@ use App\Company;
 use App\Professional;
 use App\RegimenType;
 use App\FoodType;
+use Carbon\Carbon;
 
 class ProgrammingSeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class ProgrammingSeeder extends Seeder
      */
     public function run()
     {
-        // Programming::query()->delete();
+        Programming::query()->delete();
         Programming::insert( $this->data() ); 
     }
 
@@ -30,15 +31,18 @@ class ProgrammingSeeder extends Seeder
 
         foreach($companies as $company)
         {
+            $date = Carbon::now();
             $myRegimenTypes = $regimenTypes->where('company_id', $company->id);
 
             $numProgs = rand(10, 30);
 
             if( $myRegimenTypes->count()){
+
+                $dates = [];
                 for($i=0; $i< $numProgs; $i++)
                 {
                     $data[] =[
-                        'date' => date('Y-m-d H:i:s'),
+                        'date' => Carbon::now()->subDays($i)->format('Y-m-d'),
                         'company_id' => $company->id,
                         'professional_id' => $professionals->random(1)->first()->id,
                         'regimen_type_id' => 1013,
