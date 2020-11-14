@@ -23,24 +23,35 @@ class PriceSeeder extends Seeder
         $min=1; $max=5;
         $data = [];
         $companies = Company::all();
-        $foods = Food::all();
         $factorUnits = FactorUnit::all();
 
+        $countFood = [];
         foreach($companies as $company){
-            $myFoods = $foods->random(20);
-            foreach($myFoods as $food){
-                $myFactorUnits = $factorUnits->where('food_id', $food->id);
-                foreach($myFactorUnits as $factorUnit){
-                    $data[] = [
-                        'company_id' => $company->id,
-                        'food_id' => $food->id,
-                        'factor_unit_id' => $factorUnit->id,
-                        'currency_type_id' => 1,
-                        'price' => rand($min*10, $max*10)/10,
-                    ];
+
+            $myFoods = DB::select("select distinct
+            pre.company_id, foo.*
+            from foods as foo
+            left join preparation_details as pred on pred.food_id = foo.id
+            left join preparations as pre on pre.id = pred.preparation_id
+            where pre.company_id = $company->id");
+
+            if( isset($myFoods[0])){
+                foreach($myFoods as $food){
+                    $myFactorUnits = $factorUnits->where('food_id', $food->id);
+                    foreach($myFactorUnits as $factorUnit){
+                        $data[] = [
+                            'company_id' => $company->id,
+                            'food_id' => $food->id,
+                            'factor_unit_id' => $factorUnit->id,
+                            'currency_type_id' => 1,
+                            'price' => rand($min*10, $max*10)/10,
+                        ];
+                    }
                 }
             }
         }
+
+        // dd(count($data));
         return $data;
     }
 }
