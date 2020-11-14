@@ -28,7 +28,7 @@ class FactorUnitSeeder extends Seeder
                 $data[] = [
                     'food_id' => $food->id,
                     'unit_type_id' => $unit->id,
-                    'descrip' => $faker->words(2, true),
+                    'descrip' => strtoupper($faker->words(1, true)),
                     'factor' => rand(1, 1000),
                 ];
             }

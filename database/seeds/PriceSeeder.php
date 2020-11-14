@@ -16,7 +16,13 @@ class PriceSeeder extends Seeder
     public function run()
     {
         Price::query()->delete();
-        Price::insert( $this->data() );
+
+        $datas = collect($this->data());
+
+        foreach($datas->chunk(1000) as $data){
+            Price::insert( $data->toArray() );
+        }
+        
     }
 
     public function data(){
@@ -25,33 +31,23 @@ class PriceSeeder extends Seeder
         $companies = Company::all();
         $factorUnits = FactorUnit::all();
 
+        $foods = Food::all();
+
         $countFood = [];
         foreach($companies as $company){
-
-            $myFoods = DB::select("select distinct
-            pre.company_id, foo.*
-            from foods as foo
-            left join preparation_details as pred on pred.food_id = foo.id
-            left join preparations as pre on pre.id = pred.preparation_id
-            where pre.company_id = $company->id");
-
-            if( isset($myFoods[0])){
-                foreach($myFoods as $food){
-                    $myFactorUnits = $factorUnits->where('food_id', $food->id);
-                    foreach($myFactorUnits as $factorUnit){
-                        $data[] = [
-                            'company_id' => $company->id,
-                            'food_id' => $food->id,
-                            'factor_unit_id' => $factorUnit->id,
-                            'currency_type_id' => 1,
-                            'price' => rand($min*10, $max*10)/10,
-                        ];
-                    }
+            foreach($foods as $food){
+                $myFactorUnits = $factorUnits->where('food_id', $food->id);
+                foreach($myFactorUnits as $factorUnit){
+                    $data[] = [
+                        'company_id' => $company->id,
+                        'food_id' => $food->id,
+                        'factor_unit_id' => $factorUnit->id,
+                        'currency_type_id' => 1,
+                        'price' => rand($min*10, $max*10)/10,
+                    ];
                 }
             }
         }
-
-        // dd(count($data));
         return $data;
     }
 }
