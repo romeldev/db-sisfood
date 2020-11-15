@@ -23,6 +23,7 @@ class CreateNutrientsTable extends Migration
             $table->decimal('proteinins_g')->nullable();
             $table->decimal('total_fat_g')->nullable();
             $table->decimal('total_carbohydrates_g')->nullable();
+            $table->decimal('disp_carbohydrates_g')->nullable();
             $table->decimal('raw_fiber_g')->nullable();
             $table->decimal('dietary_fiber_g')->nullable();
             $table->decimal('calcium_mg')->nullable();

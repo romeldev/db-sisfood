@@ -33,6 +33,17 @@ class CreateProgsView extends Migration
         left join regimen_types as rety on rety.id = pro.regimen_type_id
         left join professionals as prof on prof.id = pro.professional_id
         ");
+
+        
+
+        DB::unprepared("DROP FUNCTION IF EXISTS three_rule;
+        CREATE FUNCTION three_rule(nut_grams DECIMAL(9,3), nut_value DECIMAL(9,3), food_amount DECIMAL(9,3) )
+        RETURNS DECIMAL(9,3)
+        BEGIN
+                DECLARE result DECIMAL(9,3) DEFAULT 0.0;
+                set result = if(nut_grams=0 or nut_grams is null, 0, (nut_value*food_amount/nut_grams) );
+                RETURN result;
+        END");
     }
 
     /**
